@@ -44,7 +44,6 @@ changelog:
 # TODO: make sure {{.ProjectName}} is the right github repository
 dockers:
 - image_templates:
-  - 'fopina/{{.ProjectName}}:{{ .Tag }}-amd64'
   - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-amd64'
   dockerfile: Dockerfile
   use: buildx
@@ -58,7 +57,6 @@ dockers:
   - "--label=org.opencontainers.image.source={{.GitURL}}"
   - "--platform=linux/amd64"
 - image_templates:
-  - 'fopina/{{.ProjectName}}:{{ .Tag }}-arm64'
   - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-arm64'
   dockerfile:  Dockerfile
   use: buildx
@@ -74,22 +72,14 @@ dockers:
   goarch: arm64
 
 docker_manifests:
-- name_template: 'fopina/{{.ProjectName}}:{{ .Tag }}'
+- name_template: 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}'
   image_templates:
-  - 'fopina{{.ProjectName}}:{{ .Tag }}-amd64'
-  - 'fopina{{.ProjectName}}:{{ .Tag }}-arm64'
-- name_template: 'ghcr.io/fopina{{.ProjectName}}:{{ .Tag }}'
+  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-amd64'
+  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-arm64'
+- name_template: 'ghcr.io/fopina/{{.ProjectName}}:latest'
   image_templates:
-  - 'ghcr.io/fopina{{.ProjectName}}:{{ .Tag }}-amd64'
-  - 'ghcr.io/fopina{{.ProjectName}}:{{ .Tag }}-arm64'
-- name_template: 'fopina{{.ProjectName}}:latest'
-  image_templates:
-  - 'fopina{{.ProjectName}}:{{ .Tag }}-amd64'
-  - 'fopina{{.ProjectName}}:{{ .Tag }}-arm64'
-- name_template: 'ghcr.io/fopina{{.ProjectName}}:latest'
-  image_templates:
-  - 'ghcr.io/fopina{{.ProjectName}}:{{ .Tag }}-amd64'
-  - 'ghcr.io/fopina{{.ProjectName}}:{{ .Tag }}-arm64'
+  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-amd64'
+  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-arm64'
 
 snapshot:
   version_template: "{{ .Branch }}"

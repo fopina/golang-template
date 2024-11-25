@@ -32,19 +32,8 @@ jobs:
           path: |
             dist/**/*.zip
             dist/**/*.tar.gz
-      
-      - name: List snapshot images
-        run: |
-          docker image ls --format "{{.Repository}}:{{.Tag}}"
-          docker image ls --format "{{.Repository}}:{{.Tag}}" | \
-            grep -e "$GITHUB_REPOSITORY:.*$(git rev-parse --short HEAD).*"
-          docker image ls --format "{{.Repository}}:{{.Tag}}" | \
-            grep -e "$GITHUB_REPOSITORY:.*$(git rev-parse --short HEAD).*" | \
-            paste -sd ' ' /dev/stdin > images
-      - name: Push snapshot images
-        run: |
-          cat images | xargs -d ' ' -I{} -n1 sh -c "docker push {}"
+
       - name: Create and push manifest for :snapshot tag
         run: |
-          docker manifest create $GITHUB_REPOSITORY:snapshot $(cat images)
-          docker manifest push $GITHUB_REPOSITORY:snapshot
+          docker manifest create ghcr.io/$GITHUB_REPOSITORY:snapshot ghcr.io/$GITHUB_REPOSITORY:v0.0.0-arm64 ghcr.io/$GITHUB_REPOSITORY:v0.0.0-amd64
+          docker manifest push ghcr.io/$GITHUB_REPOSITORY:snapshot

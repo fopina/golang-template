@@ -1,9 +1,7 @@
-name: Test and coverage
+name: 🧪 tests
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
   test:
@@ -28,4 +26,3 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: coverage.out
           flags: unittests
-      

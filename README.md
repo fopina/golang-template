@@ -20,9 +20,8 @@ Template based off another template: github.com/fopina/golang-template
     * At least `main.go` and `go.mod` should be left after previous step
 * [ ] Replace `LICENSE` if MIT does not apply
 * [ ] Search the project for `# TODO` to find the (minimum list of) places that need to be changed.
-* [ ] Add [codecov](https://app.codecov.io/github/fopina/) token or allow tokenless uploads
+* [ ] Add [codecov](https://app.codecov.io/github/fopina/) token
     * `CODECOV_TOKEN` taken from link above; OR
-    * https://app.codecov.io/account/github/fopina/org-upload-token for allowing tokenless
 * [ ] Replace this README.md - template below
 
 ## Notes

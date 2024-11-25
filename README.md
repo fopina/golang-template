@@ -28,12 +28,9 @@ Template based off another template: github.com/fopina/golang-template
 
 ### Feature branch publishing
 
-`publish-dev` workflow publishes `dev`/`dev-*` branches to [testpypi](https://test.pypi.org).
-
-Other common approach to publish dev branches is to use pre-release channels: version the package with a `rc` or `beta` suffix (such as `1.0.0-beta1`) and pypi will consider pre-release. In order to install this, the user needs to do `pip install PACKAGE --pre` otherwise the latest stable is picked up.  
-However this will "pollute" your pypi index and it still requires you to bump the version (`1.0.0-beta1` < `1.0.0`) or to install the branch using specific version.
-
-Yet another approach is to simply use an entirely different package name for the dev releases. Tensorflow does that, for example, with [tf-nightly](https://pypi.org/project/tf-nightly/).
+`publish-dev` workflow tests and publishes branches:
+* Binaries are uploaded as artifacts to the run
+* Docker image is tagged as `dev-BRANCH` and pushed to GCHR as well
 
 ## ---
 

@@ -1,6 +1,9 @@
 name: Test and coverage
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -20,4 +23,8 @@ jobs:
         run: go test -race -coverprofile="coverage.out" -covermode=atomic ./...
 
       - name: Upload coverage to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+        uses: codecov/codecov-action@v3
+        with:
+          file: coverage.out
+          flags: unittests
+      

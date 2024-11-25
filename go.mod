@@ -2,8 +2,6 @@ module github.com/fopina/golang-template
 
 go 1.21
 
-toolchain go1.23.1
-
 require (
 	github.com/spf13/cobra v1.8.0
 	github.com/stretchr/testify v1.9.0

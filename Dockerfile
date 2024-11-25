@@ -1,3 +1,4 @@
 FROM alpine:3.20
-COPY golang-cli-template /usr/bin/golang-cli-template
-ENTRYPOINT ["/usr/bin/golang-cli-template"]
+# TODO: update binary name
+COPY golang-template /usr/bin/golang-template
+ENTRYPOINT ["/usr/bin/golang-template"]

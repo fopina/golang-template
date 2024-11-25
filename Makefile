@@ -44,8 +44,3 @@ fmt: ## format go files
 PHONY: lint
 lint: ## lint go files
 	golangci-lint run -c .golang-ci.yml
-
-.PHONY: pre-commit
-pre-commit:	## run pre-commit hooks
-	pre-commit run --all-files
-

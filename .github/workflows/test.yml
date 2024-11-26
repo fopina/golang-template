@@ -1,6 +1,10 @@
 name: 🧪 tests
 
 on:
+  push:
+    branches:
+      # just for coverage on main branch - PRs are covered by publish-dev
+      - main
   workflow_call:
 
 jobs:

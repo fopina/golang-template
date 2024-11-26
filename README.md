@@ -46,6 +46,8 @@ Template based off another template: github.com/fopina/golang-template
 
 CLI to add/multiply integers.
 
+## Usage
+
 ```sh
 ➜  golang-template -h
 golang project template demo application
@@ -73,7 +75,11 @@ Use "golang-template completion [command] --help" for more information about a c
 6
 ```
 
-# Makefile Targets
+## Build
+
+Check out [CONTRIBUTING.md](CONTRIBUTING.md)
+
+### Makefile Targets
 ```sh
 ➜  make
 bootstrap                      install build deps
@@ -87,6 +93,3 @@ snapshot                       goreleaser snapshot
 test                           display test coverage
 ```
 
-# Build
-
-Check out [CONTRIBUTING.md](CONTRIBUTING.md)

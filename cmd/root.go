@@ -8,8 +8,9 @@ import (
 
 func newRootCmd(version string) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "golang-cli-template",
-		Short: "golang-cli project template demo application",
+		// TODO: update name
+		Use:   "golang-template",
+		Short: "golang project template demo application",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return cmd.Help()
 		},

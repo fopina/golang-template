@@ -47,8 +47,8 @@ Template based off another template: github.com/fopina/golang-template
 CLI to add/multiply integers.
 
 ```sh
-$> golang-template -h
-golang-cli project template demo application
+➜  golang-template -h
+golang project template demo application
 
 Usage:
   golang-template [flags]
@@ -58,38 +58,35 @@ Available Commands:
   completion  Generate the autocompletion script for the specified shell
   example     example subcommand which adds or multiplies two given integers
   help        Help about any command
-  version     golang-cli-template version
+  version     Display version
 
 Flags:
-  -h, --help   help for golang-cli-template
+  -h, --help   help for golang-template
 
-Use "golang-cli-template [command] --help" for more information about a command.
+Use "golang-template completion [command] --help" for more information about a command.
 ```
 
 ```sh
-$> golang-cli-template example 2 5 --add
-7
-
-$> golang-cli-template example 2 5 --multiply
-10
+➜  golang-template example 2 3 --add
+5
+➜  golang-template example 2 3 --multiply
+6
 ```
 
 # Makefile Targets
 ```sh
-$> make
+➜  make
 bootstrap                      install build deps
 build                          build golang binary
 clean                          clean up environment
-cover                          display test coverage
-docker-build                   dockerize golang application
-fmt                            format go files
 help                           list makefile targets
 install                        install golang binary
-lint                           lint go files
-pre-commit                     run pre-commit hooks
+race                           display test coverage with race
 run                            run the app
+snapshot                       goreleaser snapshot
 test                           display test coverage
 ```
 
-# Contribute
-If you find issues in that setup or have some nice features / improvements, I would welcome an issue or a PR :)
+# Build
+
+Check out [CONTRIBUTING.md](CONTRIBUTING.md)

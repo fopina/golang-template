@@ -34,18 +34,17 @@ Template based off another template: github.com/fopina/golang-template
 
 ## ---
 
+# golang-template
 
-<img src="https://github.com/fopina/golang-template/actions/workflows/test.yml/badge.svg" alt="drawing"/>
-<img src="https://github.com/fopina/golang-template/actions/workflows/lint.yml/badge.svg" alt="drawing"/>
-<img src="https://pkg.go.dev/badge/github.com/fopina/golang-template.svg" alt="drawing"/>
-<img src="https://codecov.io/gh/FalcoSuessgott/golang-cli-template/branch/main/graph/badge.svg" alt="drawing"/>
-<img src="https://img.shields.io/github/v/release/FalcoSuessgott/golang-cli-template" alt="drawing"/>
-<img src="https://img.shields.io/docker/pulls/falcosuessgott/golang-cli-template" alt="drawing"/>
-<img src="https://img.shields.io/github/downloads/FalcoSuessgott/golang-cli-template/total.svg" alt="drawing"/>
-</div>
+[![goreference](https://pkg.go.dev/badge/github.com/fopina/golang-template.svg)](https://pkg.go.dev/github.com/fopina/golang-template)
+[![release](https://img.shields.io/github/v/release/fopina/golang-template)](https://github.com/fopina/golang-template/releases)
+[![downloads](https://img.shields.io/github/downloads/fopina/golang-template/total.svg)](https://github.com/fopina/golang-template/releases)
+[![ci](https://github.com/fopina/golang-template/actions/workflows/publish-main.yml/badge.svg)](https://github.com/fopina/golang-template/actions/workflows/publish-main.yml)
+[![test](https://github.com/fopina/golang-template/actions/workflows/test.yml/badge.svg)](https://github.com/fopina/golang-template/actions/workflows/test.yml)
+[![codecov](https://codecov.io/github/fopina/golang-template/graph/badge.svg)](https://codecov.io/github/fopina/golang-template)
 
 
-# Demo Application
+CLI to add/multiply integers.
 
 ```sh
 $> golang-template -h

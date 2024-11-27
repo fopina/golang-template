@@ -92,4 +92,3 @@ run                            run the app
 snapshot                       goreleaser snapshot
 test                           display test coverage
 ```
-

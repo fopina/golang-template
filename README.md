@@ -1,8 +1,6 @@
 # golang template
 
-Template based off another template: github.com/fopina/golang-template
-
-> README has not been updated!
+Template based off another template: [FalcoSuessgott/golang-cli-template](https://github.com/FalcoSuessgott/golang-cli-template/)
 
 ## Content
 

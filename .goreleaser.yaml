@@ -21,18 +21,11 @@ builds:
       - arm64
 
 archives:
-  - format: tar.gz
-    name_template: >-
-      {{ .ProjectName }}_
-      {{- title .Os }}_
-      {{- if eq .Arch "amd64" }}x86_64
-      {{- else if eq .Arch "386" }}i386
-      {{- else }}{{ .Arch }}{{ end }}
-      {{- if .Arm }}v{{ .Arm }}{{ end }}
+  - formats: tar.gz
     # use zip for windows archives
     format_overrides:
       - goos: windows
-        format: zip
+        formats: zip
 
 changelog:
   sort: asc
@@ -41,42 +34,20 @@ changelog:
       - "^docs:"
       - "^test:"
 
-# TODO: make sure {{.ProjectName}} is the right github repository
-dockers:
-- image_templates:
-  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-amd64'
-  dockerfile: Dockerfile
-  use: buildx
-  build_flag_templates:
-  - "--pull"
-  - "--label=io.artifacthub.package.license=MIT"
-  - "--label=org.opencontainers.image.created={{.Date}}"
-  - "--label=org.opencontainers.image.name={{.ProjectName}}"
-  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-  - "--label=org.opencontainers.image.version={{.Version}}"
-  - "--label=org.opencontainers.image.source={{.GitURL}}"
-  - "--platform=linux/amd64"
-- image_templates:
-  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-arm64'
-  dockerfile:  Dockerfile
-  use: buildx
-  build_flag_templates:
-  - "--pull"
-  - "--label=io.artifacthub.package.license=MIT"
-  - "--label=org.opencontainers.image.created={{.Date}}"
-  - "--label=org.opencontainers.image.name={{.ProjectName}}"
-  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-  - "--label=org.opencontainers.image.version={{.Version}}"
-  - "--label=org.opencontainers.image.source={{.GitURL}}"
-  - "--platform=linux/arm64"
-  goarch: arm64
-
-docker_manifests:
-- name_template: 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}'
-  image_templates:
-  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-amd64'
-  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-arm64'
-- name_template: 'ghcr.io/fopina/{{.ProjectName}}:latest'
-  image_templates:
-  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-amd64'
-  - 'ghcr.io/fopina/{{.ProjectName}}:{{ .Tag }}-arm64'
+dockers_v2:
+  # TODO: make sure {{.ProjectName}} is the right github repository
+  - images:
+      - ghcr.io/fopina/{{.ProjectName}}
+    tags:
+      - '{{ .Version }}'
+      - "{{ if not .IsNightly }}latest{{ end }}"
+    labels:
+      "io.artifacthub.package.license": "MIT"
+      "org.opencontainers.image.created": "{{.Date}}"
+      "org.opencontainers.image.name": "{{.ProjectName}}"
+      "org.opencontainers.image.revision": "{{.FullCommit}}"
+      "org.opencontainers.image.version": "{{.Version}}"
+      "org.opencontainers.image.source": "{{.GitURL}}"
+    platforms:
+      - linux/amd64
+      - linux/arm64

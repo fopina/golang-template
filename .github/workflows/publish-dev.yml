@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -21,6 +22,7 @@ jobs:
         uses: actions/checkout@v6
 
       - uses: ./.github/actions/release
+        id: release
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           flags: --snapshot
@@ -40,18 +42,18 @@ jobs:
           echo sanitized_branch=$SANITIZED_BRANCH >> $GITHUB_OUTPUT
 
       - name: Re-tag and push arch images
-        if: startsWith(github.head_ref, 'dev/')
+        if: startsWith(github.head_ref, 'dev/') || github.event_name == 'workflow_dispatch'
         # TODO: is this the list of images to be added to manifest? tag version and architectures?
         run: |
-          docker tag ghcr.io/${{ github.repository }}:v0.0.0-arm64 \
+          docker tag ghcr.io/${{ github.repository }}:latest-arm64 \
                     ghcr.io/${{ github.repository }}:dev-${{ steps.sanitize_branch.outputs.sanitized_branch }}-arm64
           docker push ghcr.io/${{ github.repository }}:dev-${{ steps.sanitize_branch.outputs.sanitized_branch }}-arm64
-          docker tag ghcr.io/${{ github.repository }}:v0.0.0-amd64 \
+          docker tag ghcr.io/${{ github.repository }}:latest-amd64 \
                     ghcr.io/${{ github.repository }}:dev-${{ steps.sanitize_branch.outputs.sanitized_branch }}-amd64
           docker push ghcr.io/${{ github.repository }}:dev-${{ steps.sanitize_branch.outputs.sanitized_branch }}-amd64
 
       - name: Create and push manifest for branch tag
-        if: startsWith(github.head_ref, 'dev/')
+        if: startsWith(github.head_ref, 'dev/') || github.event_name == 'workflow_dispatch'
         run: |
           docker manifest create ghcr.io/${{ github.repository }}:dev-${{ steps.sanitize_branch.outputs.sanitized_branch }} \
                                  ghcr.io/${{ github.repository }}:dev-${{ steps.sanitize_branch.outputs.sanitized_branch }}-arm64 \
@@ -59,7 +61,8 @@ jobs:
           docker manifest push ghcr.io/${{ github.repository }}:dev-${{ steps.sanitize_branch.outputs.sanitized_branch }}
 
       - name: Show summary
-        if: startsWith(github.head_ref, 'dev/')
+        if: startsWith(github.head_ref, 'dev/') || github.event_name == 'workflow_dispatch'
         run: |
+          echo 'Snapshot: ${{ steps.release.outputs.version }}  ' >> ${GITHUB_STEP_SUMMARY}
           echo 'Published:  ' >> ${GITHUB_STEP_SUMMARY}
           echo '* `ghcr.io/${{ github.repository }}:dev-${{ steps.sanitize_branch.outputs.sanitized_branch }}`' >> ${GITHUB_STEP_SUMMARY}
